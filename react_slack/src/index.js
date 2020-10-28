@@ -5,28 +5,32 @@ import App from './App';
 import 'semantic-ui-css/semantic.min.css'
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Switch, Route, withRouter } from "react-router-dom";
-import {Provider,connect} from 'react-redux'
-import {createStore} from 'redux'
-import {combinedReducers} from './store/reducer'
-import {setUser} from './store/actioncreator'
+import { Provider, connect } from 'react-redux'
+import { createStore } from 'redux'
+import { combinedReducers } from './store/reducer'
+import { setUser } from './store/actioncreator'
 
 import Register from './components/Register';
 import Login from './components/Login';
 import firebase from './base/firebase'
 
-const store=createStore(combinedReducers)
+const store = createStore(combinedReducers)
 
 const Index = (props) => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-          props.history.push("/")
+        props.setUser(user)
+        props.history.push("/")
       } else {
+        props.setUser(null)
         props.history.push("/login")
 
       }
     })
   }, []);
+
+  console.log(props.currentUser);
 
   return (
     <Switch>
@@ -37,14 +41,29 @@ const Index = (props) => {
   )
 }
 
-const IndexWithRouter = withRouter(connect()(Index))
+
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.user.currentUser,
+    loading: state.channel.loading
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUser: (user) => { dispatch(setUser(user)) }
+  }
+}
+
+
+const IndexWithRouter = withRouter(connect(mapStateToProps, mapDispatchToProps)(Index))
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}> 
-    <Router>
-      <IndexWithRouter />
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <IndexWithRouter />
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

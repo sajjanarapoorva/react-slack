@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import './style.css'
 import firebase from '../base/firebase';
 
-
 const Register =()=>{
   let user = {
     userName: '',
