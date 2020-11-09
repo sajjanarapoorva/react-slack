@@ -25,10 +25,9 @@ const Index = (props) => {
       } else {
         props.setUser(null)
         props.history.push("/login")
-
       }
     })
-  }, []);
+  });
 
   console.log(props.currentUser);
 
