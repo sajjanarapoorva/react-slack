@@ -4,6 +4,7 @@ import { Menu, Icon, Modal } from 'semantic-ui-react'
 import { Form, Segment, Button } from 'semantic-ui-react'
 import firebase from '../base/firebase'
 import { setChannel } from '../store/actioncreator'
+import Notification from './Notification'
 
 import './style.css'
 
@@ -15,6 +16,8 @@ const Channel = (props) => {
     const [channelState, setchannelState] = useState([])
 
     const channelsRef = firebase.database().ref("channels")
+    const UserRef = firebase.database().ref("users")
+
 
     useEffect(() => {
         channelsRef.on('child_added', (snap) => {
@@ -53,15 +56,33 @@ const Channel = (props) => {
                 return <Menu.Item
                     key={channel.id}
                     name={channel.name}
-                    onClick={()=>{props.selectChannel(channel)}}
-                    active={props.channel && channel.id===props.channel.id}
+                    onClick={()=>{selectChannel(channel)}}
+                    active={props.channel && channel.id===props.channel.id && !props.channel.isFav}
+                    
                 >
-                    {'# '+ channel.name}
+                    
+                    <Notification user={props.user} channel={props.channel} notificationChannelId={channel.id}
+                    displayName={'# '+ channel.name}
+                    />
                    
                 </Menu.Item>
             })
         }
     }
+
+    const selectChannel=(channel)=>{
+        setLatVisited(props.user,props.channel)
+        setLatVisited(props.user,channel)
+        props.selectChannel(channel)
+
+    }
+
+    const setLatVisited=(user,channel)=>{
+        const LatVisited=UserRef.child(user.uid).child("lastvisited").child(channel.id);
+        LatVisited.set(firebase.database.ServerValue.TIMESTAMP)
+        LatVisited.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP)
+    }
+
 
     const onSubmit = () => {
         if (!checkFormValid()) {
@@ -101,7 +122,7 @@ const Channel = (props) => {
         })
     }
 
-    return <><Menu.Menu>
+    return <><Menu.Menu style={{marginTop:"35px"}}>
         <Menu.Item style={{fontSize:"17px"}}>
             <span>
                 <Icon name="exchange"></Icon>Channels

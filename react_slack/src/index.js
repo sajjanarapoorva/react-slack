@@ -13,6 +13,7 @@ import { setUser } from './store/actioncreator'
 import Register from './components/Register';
 import Login from './components/Login';
 import firebase from './base/firebase'
+import AppLoader from './components/Loader'
 
 const store = createStore(combinedReducers)
 
@@ -31,11 +32,14 @@ const Index = (props) => {
 
 
   return (
-    <Switch>
+    <>
+    <AppLoader loading={props.loading && props.location.pathname==="/"} />
+     <Switch>
       <Route path="/login" component={Login}></Route>
       <Route path="/register" component={Register}></Route>
       <Route path="/" component={App}></Route>
     </Switch>
+    </>
   )
 }
 

@@ -6,7 +6,10 @@ const MessageHeader = (props) => {
         <Header floated="left" fluid="true" as="h2">
             <span>
                 {(props.isPrivatechat ?"@ ": "# ")+ props.channelName}
-                {!props.isPrivatechat &&  <Icon name="star outline"></Icon>}
+                {!props.isPrivatechat &&  <Icon onClick={props.starChange} 
+                name={props.starred ? "star" :"star outline"}
+                color={props.starred ? "yellow" :"black"}
+                ></Icon>}
                
             </span>
         <Header.Subheader>{props.uniqueUser} User{props.uniqueUser<=1?"":"s"}</Header.Subheader>

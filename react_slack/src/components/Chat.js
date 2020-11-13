@@ -3,13 +3,12 @@ import { connect } from 'react-redux'
 import { Menu, Icon } from 'semantic-ui-react'
 import firebase from '../base/firebase'
 import { setChannel } from '../store/actioncreator'
+import Notification from './Notification'
 
 
 const Chat = (props) => {
     const [UserState, setUserState] = useState([])
     const [ConnectedUserState, setConnectedUserState] = useState([])
-
-
     const UserRef = firebase.database().ref("users")
     const connectedRef =firebase.database().ref(".info/connected")
     const statusRef=firebase.database().ref("status")
@@ -70,7 +69,10 @@ const Chat = (props) => {
                     active={props.channel && generateId(user.id)===props.channel.id}
                 >
                     <Icon name="circle" color={`${ConnectedUserState.indexOf(user.id)!==-1 ? "green":"red"}`}></Icon>
-                    {'@ '+user.name}
+                    
+                    <Notification user={props.user} channel={props.channel} notificationChannelId={generateId(user.id)}
+                    displayName={'@ '+user.name}
+                    />
                    
                 </Menu.Item>
             })
@@ -81,10 +83,17 @@ const Chat = (props) => {
         let userTemp={
             ...user
         }
-
         userTemp.id=generateId(user.id)
+        setLatVisited(props.user,props.channel)
+        setLatVisited(props.user,userTemp)
         props.selectChannel(userTemp)
 
+    }
+
+    const setLatVisited=(user,channel)=>{
+        const LatVisited=UserRef.child(user.uid).child("lastvisited").child(channel.id);
+        LatVisited.set(firebase.database.ServerValue.TIMESTAMP)
+        LatVisited.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP)
     }
 
     const generateId=(userId)=>{

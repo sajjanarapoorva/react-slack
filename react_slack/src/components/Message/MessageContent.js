@@ -14,7 +14,7 @@ const MessageContent = (props) => {
         <Comment.Content className={props.ownMessage ? "ownMessage": null}>
             <Comment.Author>{props.message.user.name}</Comment.Author>
             <Comment.Metadata>{timeAgo.format(props.message.timestamp)}</Comment.Metadata>
-            {props.message.image ? <Image src={props.message.image}></Image>:
+            {props.message.image ? <Image onLoad={props.imgLoaded} src={props.message.image}></Image>:
             <Comment.Text>{props.message.content}</Comment.Text>
         }
             
