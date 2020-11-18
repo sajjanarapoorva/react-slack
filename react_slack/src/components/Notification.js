@@ -23,7 +23,7 @@ const Notification = (props) => {
 
             messagesRef.on('value', snap => {
                 let messages = snap.val();
-                let channelsId = Object.keys(messages);
+                let channelsId = Object?.keys(messages);
                 let messagesTimeStamp = {};
                 channelsId.forEach((channelId) => {
                     let channelMessageKeys = Object.keys(messages[channelId]);
@@ -54,7 +54,7 @@ const Notification = (props) => {
         return null;
     }
 
-    return <> {props.displayName}{calculateNotificationCount(props.notificationChannelId)} </>;
+    return <>  {props.displayName} {calculateNotificationCount(props.notificationChannelId)} </>;
 }
 
 export default Notification

@@ -72,8 +72,8 @@ const Message = (props) => {
 
         if (messageToDisplay.length > 0) {
             return messageToDisplay.map((message) => {
-                return <MessageContent key={message.timestamp} message={message} ownMessage={message.user?.id === props.user?.uid} imgLoaded={imgLoaded}></MessageContent>
-
+                return <MessageContent key={message.timestamp} message={message} ownMessage={message.user?.id === props.user?.uid} imgLoaded={imgLoaded}>
+                </MessageContent>
             })
         }
     }
@@ -100,9 +100,7 @@ const Message = (props) => {
             console.log();
             if ((message.content && message.content.match(regex)) || (message.user.name.match(regex))) {
                 acc.push(message);
-
             }
-
             return acc
         }, [])
 
@@ -119,8 +117,6 @@ const Message = (props) => {
         else {
             FavRef.set({ channelId: props.channel.id, channelName: props.channel.name })
         }
-
-
     }
 
     const isStared = () => {
@@ -129,7 +125,7 @@ const Message = (props) => {
     }
 
     return <div className="messages">
-        <MessageHeader channelName={props.channel?.name} uniqueUser={uniqueUserCount()} searchChange={searchChange} isPrivatechat={props.channel?.isPrivatechat}
+        <MessageHeader channelDesc={props.channel?.desc} channelName={props.channel?.name} uniqueUser={uniqueUserCount()} searchChange={searchChange} isPrivatechat={props.channel?.isPrivatechat}
             starChange={starChange} starred={isStared()}
         />
         <Segment className="messagecontent">

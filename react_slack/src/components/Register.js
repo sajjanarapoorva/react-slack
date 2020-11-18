@@ -105,11 +105,10 @@ const Register = () => {
         userCollectionRef.child(createdUser.user.uid).set({
             displayName: createdUser.user.displayName,
             photoURL: createdUser.user.photoURL
+        }).then(() => {
+            setIsLoading(false);
+            setIsSuccess(true);
         })
-            .then(() => {
-                setIsLoading(false);
-                setIsSuccess(true);
-            })
             .catch(serverError => {
                 setIsLoading(false);
                 seterrorState((error) => error.concat(serverError));

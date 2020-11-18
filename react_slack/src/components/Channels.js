@@ -14,7 +14,6 @@ const Channel = (props) => {
     const [channelAddState, setchannelAddState] = useState({ Name: '', Desc: '' })
     const [isLoading, setisLoading] = useState(false)
     const [channelState, setchannelState] = useState([])
-
     const channelsRef = firebase.database().ref("channels")
     const UserRef = firebase.database().ref("users")
 
@@ -58,9 +57,7 @@ const Channel = (props) => {
                     name={channel.name}
                     onClick={()=>{selectChannel(channel)}}
                     active={props.channel && channel.id===props.channel.id && !props.channel.isFav}
-                    
                 >
-                    
                     <Notification user={props.user} channel={props.channel} notificationChannelId={channel.id}
                     displayName={'# '+ channel.name}
                     />
@@ -99,7 +96,6 @@ const Channel = (props) => {
             }
         }
         setisLoading(true)
-
         channelsRef.child(key).update(channel).then(() => {
             setchannelAddState({ Name: "", Desc: "" })
             setisLoading(false)
@@ -110,8 +106,6 @@ const Channel = (props) => {
         })
 
     }
-
-
 
     const handleInput = (e) => {
         let target = e.target;
@@ -135,13 +129,6 @@ const Channel = (props) => {
         
         </Menu.Item>
         {displayChannels()}
-        {/* <Menu.Item >
-            <span onClick={openModel}>
-                <Icon name="add">
-                </Icon>
-                ADD
-            </span>
-        </Menu.Item> */}
 
     </Menu.Menu>
         <Modal open={ModelOpenState} onClose={closeModel}>

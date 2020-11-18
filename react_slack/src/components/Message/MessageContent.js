@@ -9,6 +9,7 @@ TimeAgo.locale(en)
 const timeAgo=new TimeAgo();
 
 const MessageContent = (props) => {
+    // console.log(props.message.user.name);
     return <Comment>
         <Comment.Avatar src={props.message.user.avatar} />
         <Comment.Content style={{fontSize:"15px"}} className={props.ownMessage ? "ownMessage": null}>
@@ -16,8 +17,7 @@ const MessageContent = (props) => {
             <Comment.Metadata>{timeAgo.format(props.message.timestamp)}</Comment.Metadata>
             {props.message.image ? <Image onLoad={props.imgLoaded} src={props.message.image} style={{width:"60%"}}></Image>:
             <Comment.Text>{props.message.content}</Comment.Text>
-        }
-            
+            }
         </Comment.Content>
     </Comment>
 }

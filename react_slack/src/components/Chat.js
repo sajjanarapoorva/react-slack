@@ -60,6 +60,7 @@ const Chat = (props) => {
 
 
     const displayUsers = () => {
+        // console.log(props.displaygName);
         if (UserState.length > 0) {
             return UserState.filter((user) => user.id!=props.user?.uid).map((user)=>{
                 return <Menu.Item
@@ -73,7 +74,6 @@ const Chat = (props) => {
                     <Notification user={props.user} channel={props.channel} notificationChannelId={generateId(user.id)}
                     displayName={'@ '+user.name}
                     />
-                   
                 </Menu.Item>
             })
         }

@@ -10,11 +10,10 @@ const MessageHeader = (props) => {
                 name={props.starred ? "star" :"star outline"}
                 color={props.starred ? "yellow" :"black"}
                 ></Icon>}
-               
             </span>
-        <Header.Subheader>{props.uniqueUser} User{props.uniqueUser<=1?"":"s"}</Header.Subheader>
+        <Header.Subheader><Icon name="user outline"></Icon>{props.uniqueUser} | {props.channelDesc}
+        </Header.Subheader> 
         </Header>
-
         <Header floated="right">
             <Input
                 name="search"
@@ -22,7 +21,6 @@ const MessageHeader = (props) => {
                 placeholder="Search Messages"
                 size="mini"
                 onChange={props.searchChange}
-                
             />
         </Header>
     </Segment>

@@ -11,9 +11,9 @@ import { combinedReducers } from './store/reducer'
 import { setUser } from './store/actioncreator'
 
 import Register from './components/Register';
+import ForgotPassword from './components/Forgot_Paaword';
 import Login from './components/Login';
 import firebase from './base/firebase'
-
 import AppLoader from './components/Loader'
 
 const store = createStore(combinedReducers)
@@ -24,7 +24,12 @@ const Index = (props) => {
       if (user) {
         props.setUser(user)
         props.history.push("/")
-      } else {
+      } 
+      else if(props.location.pathname==="/forgotpassword"){
+        props.setUser(null)
+        props.history.push("/forgotpassword")
+      }
+      else {
         props.setUser(null)
         props.history.push("/login")
       }
@@ -36,6 +41,7 @@ const Index = (props) => {
     <>
     <AppLoader loading={props.loading && props.location.pathname==="/"} />
      <Switch>
+      <Route path="/forgotpassword" component={ForgotPassword}></Route>
       <Route path="/login" component={Login}></Route>
       <Route path="/register" component={Register}></Route>
       <Route path="/" component={App}></Route>

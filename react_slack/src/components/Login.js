@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Grid, Form, Segment, Header, Icon, Button, Message } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import Chat from './Chat'
 
 import firebase from '../base/firebase';
 
 const Login = () => {
-
     let user = {
+        name:'',
         email: '',
         password: ''
     }
@@ -16,6 +17,7 @@ const Login = () => {
     const [userState, setuserState] = useState(user);
     const [isLoading, setIsLoading] = useState(false);
     const [errorState, seterrorState] = useState(errors);
+
     var provider = new firebase.auth.GoogleAuthProvider();
 
     const handleInput = (event) => {
@@ -44,7 +46,7 @@ const Login = () => {
         return errorState.map((error, index) => <p key={index}>{error.message}</p>)
     }
 
-    const onSubmit = (event) => {
+    const onSubmit = () => {
         seterrorState(() => []);
         if (checkForm()) {
             setIsLoading(true);
@@ -58,16 +60,38 @@ const Login = () => {
                     setIsLoading(false);
                     seterrorState((error) => error.concat(serverError));
                 })
-
         }
     }
 
-    const abc = () => {
+
+    const googleUser = () => {
         firebase.auth().signInWithPopup(provider).then(function (result) {
             // This gives you a Google Access Token. You can use it to access the Google API.
             var token = result.credential.accessToken;
             // The signed-in user info.
             var user = result.user;
+            firebase.auth()
+            .createUserWithEmailAndPassword(userState.email, userState.password)
+            .then(createdUser => {
+                createdUser.user
+                .updateProfile({
+                    displayName: user.displayName,
+                })
+                console.log(createdUser);
+            })
+
+            console.log(user.displayName);
+                try {
+                   firebase
+                    .database().ref("users").push({
+                        displayName :user.displayName,
+                        name:user.displayName
+                    })
+                  
+                } catch (error) {
+                  console.log(error);
+                }
+              
             // ...
         }).catch(function (error) {
             // Handle Errors here.
@@ -86,12 +110,12 @@ const Login = () => {
             <img src="Screen-Shot-2019-01-17-at-2.29.34-PM.png" style={{ marginTop: "50px", width: "40%" }}></img>
             <p className="p-refreshed_page__heading">Sign in to Slack</p>
             <p className="p-refreshed_page__sub_heading">Continue with the Google account or email address you use to sign in.</p>
-            <Button color="primary" basic fluid={true} style={{marginBottom:"30px",fontSize:"80%"}} onClick={abc}>
-            <img src="Capture.PNG" style={{width:"80%"}}></img>
-            </Button>
-            <div class="c-horizontal_content_rule margin_bottom_150"><hr class="c-horizontal_content_rule__leftrule"/>
-            <div class="c-horizontal_content_rule__content"><strong class="sk_light_gray_always">OR</strong></div>
-            <hr class="c-horizontal_content_rule__rightrule"/></div>
+            {/* <Button color="primary" basic fluid={true} style={{marginBottom:"30px",fontSize:"80%"}} onClick={googleUser}> */}
+            {/* <img src="Capture.PNG" style={{width:"80%"}}></img>
+            </Button> */}
+            {/* <div className="c-horizontal_content_rule margin_bottom_150"><hr class="c-horizontal_content_rule__leftrule"/>
+            <div className="c-horizontal_content_rule__content"><strong class="sk_light_gray_always">OR</strong></div>
+            <hr className="c-horizontal_content_rule__rightrule"/></div> */}
             <Form onSubmit={onSubmit}>
                 <Segment stacked>
                     <Form.Input
@@ -121,10 +145,14 @@ const Login = () => {
             </Message>
             }
             <Message>
-                Not an User? <Link to="/register" >Register </Link>
+                Not an User? <Link to="/register">Register </Link>
             </Message>
-        </Grid.Column>
+            <Message>
+                Forgot Password? <Link to="/forgotPassword">Forgot Password </Link>
+            </Message>
+        </Grid.Column>        
     </Grid>
+    
 }
 
 export default Login;

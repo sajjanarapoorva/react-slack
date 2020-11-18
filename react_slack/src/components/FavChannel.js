@@ -5,7 +5,7 @@ import { setChannel } from '../store/actioncreator'
 
 
 const FavChannels = (props) => {
-
+    
     const displayChannels = () => {
         if (Object.keys(props.favouriteChannels).length > 0) {
             return Object.keys(props.favouriteChannels).map((channelId)=>{
@@ -15,9 +15,7 @@ const FavChannels = (props) => {
                     onClick={()=>{props.selectChannel({id:channelId,name:props.favouriteChannels[channelId],isFav:true})}}
                     active={props.channel && channelId===props.channel.id && props.channel.isFav}
                 >
-                    
                     {'# '+props.favouriteChannels[channelId]}
-                   
                 </Menu.Item>
             })
         }
@@ -38,7 +36,6 @@ const FavChannels = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        
         channel:state.channel.currentChannel,
         favouriteChannels:state.favouriteChannel.favouriteChannel
     }
