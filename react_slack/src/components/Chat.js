@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Menu, Icon } from 'semantic-ui-react'
 import firebase from '../base/firebase'
@@ -62,7 +62,7 @@ const Chat = (props) => {
     const displayUsers = () => {
         // console.log(props.displaygName);
         if (UserState.length > 0) {
-            return UserState.filter((user) => user.id!=props.user?.uid).map((user)=>{
+            return UserState.filter((user) => user.id!==props.user?.uid).map((user)=>{
                 return <Menu.Item
                     key={user.id}
                     name={user.name}

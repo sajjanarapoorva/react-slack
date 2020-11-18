@@ -1,4 +1,4 @@
-import React, { useRef ,useState} from 'react';
+import React from 'react';
 import { Grid, Header, Icon, Image, Dropdown } from 'semantic-ui-react';
 import { connect } from "react-redux";
 import firebase from '../base/firebase';
@@ -6,8 +6,8 @@ import firebase from '../base/firebase';
 import "./style.css";
 
 const UserInfo = (props) => {
-    let userCollectionRef = firebase.database().ref('users');
-    const [img, setimg] = useState([]);
+    // let userCollectionRef = firebase.database().ref('users');
+    // const [img, setimg] = useState([]);
 
     const signOut = () => {
         firebase.auth()

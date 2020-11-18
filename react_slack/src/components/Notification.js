@@ -27,7 +27,7 @@ const Notification = (props) => {
                 let messagesTimeStamp = {};
                 channelsId.forEach((channelId) => {
                     let channelMessageKeys = Object.keys(messages[channelId]);
-                    channelMessageKeys.reduce((agg, item) => {
+                    channelMessageKeys.reduce((item) => {
                         messagesTimeStamp[channelId] = [...messagesTimeStamp[channelId] || []];
                         messagesTimeStamp[channelId].push(messages[channelId][item].timestamp);
                     })

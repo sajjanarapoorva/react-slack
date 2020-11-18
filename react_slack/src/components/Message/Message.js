@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Segment, Input, Comment } from 'semantic-ui-react';
+import { Segment, Comment } from 'semantic-ui-react';
 import MessageHeader from '../Message/MessageHeader'
 import MessageContent from '../Message/MessageContent'
 import MessageInput from '../Message/MessageInput'

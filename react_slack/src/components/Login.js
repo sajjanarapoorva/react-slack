@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Grid, Form, Segment, Header, Icon, Button, Message } from 'semantic-ui-react'
+import { Grid, Form, Segment,  Button, Message } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import Chat from './Chat'
 
 import firebase from '../base/firebase';
 
@@ -18,7 +17,7 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [errorState, seterrorState] = useState(errors);
 
-    var provider = new firebase.auth.GoogleAuthProvider();
+    // var provider = new firebase.auth.GoogleAuthProvider();
 
     const handleInput = (event) => {
         let target = event.target;
@@ -64,50 +63,50 @@ const Login = () => {
     }
 
 
-    const googleUser = () => {
-        firebase.auth().signInWithPopup(provider).then(function (result) {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            var token = result.credential.accessToken;
-            // The signed-in user info.
-            var user = result.user;
-            firebase.auth()
-            .createUserWithEmailAndPassword(userState.email, userState.password)
-            .then(createdUser => {
-                createdUser.user
-                .updateProfile({
-                    displayName: user.displayName,
-                })
-                console.log(createdUser);
-            })
+    // const googleUser = () => {
+    //     firebase.auth().signInWithPopup(provider).then(function (result) {
+    //         // This gives you a Google Access Token. You can use it to access the Google API.
+    //         var token = result.credential.accessToken;
+    //         // The signed-in user info.
+    //         var user = result.user;
+    //         firebase.auth()
+    //         .createUserWithEmailAndPassword(userState.email, userState.password)
+    //         .then(createdUser => {
+    //             createdUser.user
+    //             .updateProfile({
+    //                 displayName: user.displayName,
+    //             })
+    //             console.log(createdUser);
+    //         })
 
-            console.log(user.displayName);
-                try {
-                   firebase
-                    .database().ref("users").push({
-                        displayName :user.displayName,
-                        name:user.displayName
-                    })
+    //         console.log(user.displayName);
+    //             try {
+    //                firebase
+    //                 .database().ref("users").push({
+    //                     displayName :user.displayName,
+    //                     name:user.displayName
+    //                 })
                   
-                } catch (error) {
-                  console.log(error);
-                }
+    //             } catch (error) {
+    //               console.log(error);
+    //             }
               
-            // ...
-        }).catch(function (error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // The email of the user's account used.
-            var email = error.email;
-            // The firebase.auth.AuthCredential type that was used.
-            var credential = error.credential;
-            // ...
-        });
-    }
+    //         // ...
+    //     }).catch(function (error) {
+    //         // Handle Errors here.
+    //         var errorCode = error.code;
+    //         var errorMessage = error.message;
+    //         // The email of the user's account used.
+    //         var email = error.email;
+    //         // The firebase.auth.AuthCredential type that was used.
+    //         var credential = error.credential;
+    //         // ...
+    //     });
+    // }
 
     return <Grid verticalAlign="top" textAlign="center" className="grid-form" >
         <Grid.Column style={{ maxWidth: '500px' }}>
-            <img src="Screen-Shot-2019-01-17-at-2.29.34-PM.png" style={{ marginTop: "50px", width: "40%" }}></img>
+            <img src="Screen-Shot-2019-01-17-at-2.29.34-PM.png" alt="logo" style={{ marginTop: "50px", width: "40%" }}></img>
             <p className="p-refreshed_page__heading">Sign in to Slack</p>
             <p className="p-refreshed_page__sub_heading">Continue with the Google account or email address you use to sign in.</p>
             {/* <Button color="primary" basic fluid={true} style={{marginBottom:"30px",fontSize:"80%"}} onClick={googleUser}> */}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Form, Segment, Header, Icon, Button, Message, Checkbox } from 'semantic-ui-react'
+import { Grid, Form, Segment, Button, Message } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import './style.css'
 import firebase from '../base/firebase';
@@ -121,7 +121,7 @@ const Register = () => {
 
     return (<Grid verticalAlign="top" textAlign="center" className="grid-form" >
         <Grid.Column style={{ maxWidth: '500px' }}>
-            <img src="Screen-Shot-2019-01-17-at-2.29.34-PM.png" style={{ marginTop: "50px", width: "40%" }}></img>
+            <img src="Screen-Shot-2019-01-17-at-2.29.34-PM.png" alt="logo" style={{ marginTop: "50px", width: "40%" }}></img>
             <p className="p-refreshed_page__heading">Create Account</p>
             <p className="p-refreshed_page__sub_heading">We suggest using the email address you use at work.</p>
             <Form onSubmit={onSubmit}>

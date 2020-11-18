@@ -1,6 +1,5 @@
 import React from 'react';
 import { Comment,Image } from 'semantic-ui-react'
-import firebase from '../../base/firebase'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import '../style.css'

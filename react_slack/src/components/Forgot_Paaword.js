@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Grid, Form, Segment, Header, Icon, Button, Message } from 'semantic-ui-react'
+import { Grid, Form, Segment, Button, Message } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 import firebase from '../base/firebase';
@@ -28,19 +28,6 @@ const ForgotPassword = ({ history }) => {
             currentuser[target.name] = target.value;
             return currentuser;
         })
-    }
-
-    const checkForm = () => {
-        if (isFormEmpty()) {
-            seterrorState((error) => error.concat({ message: "Please fill in all fields" }));
-            return false;
-        }
-        return true;
-    }
-
-    const isFormEmpty = () => {
-        return !userState.password.length ||
-            !userState.email.length;
     }
 
     const formaterrors = () => {
@@ -72,7 +59,7 @@ const ForgotPassword = ({ history }) => {
 
     return <Grid verticalAlign="top" textAlign="center" className="grid-form" >
         <Grid.Column style={{ maxWidth: '500px' }}>
-            <img src="Screen-Shot-2019-01-17-at-2.29.34-PM.png" style={{ marginTop: "50px", width: "40%" }}></img>
+            <img src="Screen-Shot-2019-01-17-at-2.29.34-PM.png" alt="logo"style={{ marginTop: "50px", width: "40%" }}></img>
             <p className="p-refreshed_page__heading">Forgot Passowrd</p>
             <p className="p-refreshed_page__sub_heading">What email address are you using on Slack ?</p>
             <Form onSubmit={handleForgotPassword}>

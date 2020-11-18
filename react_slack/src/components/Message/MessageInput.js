@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { Segment, Input, Button } from 'semantic-ui-react';
 import firebase from '../../base/firebase'
 import { connect } from 'react-redux'
@@ -70,15 +70,15 @@ const MessageInput = (props) => {
 
 
 
-    const createActionButtons = () => {
-        return <>
-            <Button icon="send" onClick={() => { onSubmit() }} />
-            <Button icon="upload" onClick={() => setfileDialogState(true)} />
-            {/* <Button icon="smile outline" onClick={handleEmojiPicker} />
-            {emojiState ? (
-                <Picker style={{ position: 'absolute', bottom: '40px', right: '20px' }} onKeyPress={handleKeypress} onSelect={(emoji) => { addEmoji(emoji) }} emojiSize={20} />) : null} */}
-        </>
-    }
+    // const createActionButtons = () => {
+    //     return <>
+    //         <Button icon="send" onClick={() => { onSubmit() }} />
+    //         <Button icon="upload" onClick={() => setfileDialogState(true)} />
+    //         {/* <Button icon="smile outline" onClick={handleEmojiPicker} />
+    //         {emojiState ? (
+    //             <Picker style={{ position: 'absolute', bottom: '40px', right: '20px' }} onKeyPress={handleKeypress} onSelect={(emoji) => { addEmoji(emoji) }} emojiSize={20} />) : null} */}
+    //     </>
+    // }
 
     const uploadImage = (file, contentType) => {
         const filePath = `chat/images/${uuidv4()}.jpg`;
