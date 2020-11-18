@@ -72,7 +72,7 @@ const Message = (props) => {
 
         if (messageToDisplay.length > 0) {
             return messageToDisplay.map((message) => {
-                return <MessageContent key={message.timestamp} message={message} ownMessage={message.user.id === props.user.uid} imgLoaded={imgLoaded}></MessageContent>
+                return <MessageContent key={message.timestamp} message={message} ownMessage={message.user?.id === props.user?.uid} imgLoaded={imgLoaded}></MessageContent>
 
             })
         }

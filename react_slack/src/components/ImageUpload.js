@@ -35,6 +35,7 @@ const ImageUpload=(props)=>{
             label="File Type (png , jpeg)"
             >
             </Input>
+            
         </Modal.Content>
 
         <Modal.Actions>

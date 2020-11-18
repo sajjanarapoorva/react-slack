@@ -127,16 +127,21 @@ const Channel = (props) => {
             <span>
                 <Icon name="exchange"></Icon>Channels
             </span>
-        ({channelState.length})
+            ({channelState.length})
+            <span style={{marginLeft:"20px"}} onClick={openModel}>
+                <Icon name="add circle">
+                </Icon>
+            </span>
+        
         </Menu.Item>
         {displayChannels()}
-        <Menu.Item >
+        {/* <Menu.Item >
             <span onClick={openModel}>
                 <Icon name="add">
                 </Icon>
                 ADD
             </span>
-        </Menu.Item>
+        </Menu.Item> */}
 
     </Menu.Menu>
         <Modal open={ModelOpenState} onClose={closeModel}>
@@ -149,6 +154,7 @@ const Channel = (props) => {
                     <Segment stacked>
                         <Form.Input
                             name="Name"
+                            
                             value={channelAddState.Name}
                             onChange={handleInput}
                             type="text"

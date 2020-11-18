@@ -61,7 +61,7 @@ const Chat = (props) => {
 
     const displayUsers = () => {
         if (UserState.length > 0) {
-            return UserState.filter((user) => user.id!=props.user.uid).map((user)=>{
+            return UserState.filter((user) => user.id!=props.user?.uid).map((user)=>{
                 return <Menu.Item
                     key={user.id}
                     name={user.name}
@@ -91,17 +91,17 @@ const Chat = (props) => {
     }
 
     const setLatVisited=(user,channel)=>{
-        const LatVisited=UserRef.child(user.uid).child("lastvisited").child(channel.id);
+        const LatVisited=UserRef.child(user?.uid).child("lastvisited").child(channel.id);
         LatVisited.set(firebase.database.ServerValue.TIMESTAMP)
         LatVisited.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP)
     }
 
     const generateId=(userId)=>{
-        if(props.user.uid < userId){
-            return props.user.uid + userId
+        if(props.user?.uid < userId){
+            return props.user?.uid + userId
         }
             else{
-                return userId+props.user.uid
+                return userId+props.user?.uid
             }
         
     }
@@ -109,7 +109,7 @@ const Chat = (props) => {
     return <Menu.Menu style={{marginTop:"35px"}}>
         <Menu.Item style={{fontSize:"17px"}}>
             <span>
-                <Icon name="mail"></Icon>Chat
+                <Icon name="mail"></Icon>Direct Messages
             </span>
         ({UserState.length -1})
         </Menu.Item>

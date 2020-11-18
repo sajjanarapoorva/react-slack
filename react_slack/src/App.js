@@ -1,6 +1,7 @@
 import React from 'react';
 import { SideBar } from "./components/Sidebar";
 import Messages from "./components/Message/Message"
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 
 import './App.css';
 import { Grid } from 'semantic-ui-react';

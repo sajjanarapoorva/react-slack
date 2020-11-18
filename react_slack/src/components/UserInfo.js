@@ -6,17 +6,18 @@ import firebase from '../base/firebase';
 import "./style.css";
 
 const UserInfo = (props) => {
-    const getDropDownOptions = () => {
-        return [{
-            key: 'signout',
-            text: <span onClick={signOut} >Sign Out</span>
-        }]
-    }
 
     const signOut = () => {
         firebase.auth()
             .signOut()
             .then(() => console.log("user signed out"));
+    }
+
+    const getDropDownOptions = () => {
+        return [{
+            key: 'signout',
+            text: <span onClick={signOut} >Sign Out</span>
+        }]
     }
 
     if (props.user) {

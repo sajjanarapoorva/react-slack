@@ -13,6 +13,7 @@ import { setUser } from './store/actioncreator'
 import Register from './components/Register';
 import Login from './components/Login';
 import firebase from './base/firebase'
+
 import AppLoader from './components/Loader'
 
 const store = createStore(combinedReducers)
