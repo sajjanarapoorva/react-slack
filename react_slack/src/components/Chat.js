@@ -60,7 +60,6 @@ const Chat = (props) => {
 
 
     const displayUsers = () => {
-        // console.log(props.displaygName);
         if (UserState.length > 0) {
             return UserState.filter((user) => user.id!==props.user?.uid).map((user)=>{
                 return <Menu.Item
@@ -70,7 +69,6 @@ const Chat = (props) => {
                     active={props.channel && generateId(user.id)===props.channel.id}
                 >
                     <Icon name="circle" color={`${ConnectedUserState.indexOf(user.id)!==-1 ? "green":"red"}`}></Icon>
-                    
                     <Notification user={props.user} channel={props.channel} notificationChannelId={generateId(user.id)}
                     displayName={'@ '+user.name}
                     />

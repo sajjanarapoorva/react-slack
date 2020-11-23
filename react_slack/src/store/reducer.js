@@ -1,4 +1,4 @@
-import { SET_USER, SET_CHANNEL, SET_FAVOURITECHANNEL, REMOVE_FAVOURITECHANNEL } from './actiontypes';
+import { SET_USER, SET_CHANNEL, SET_FAVOURITECHANNEL, REMOVE_FAVOURITECHANNEL, MESSAGE,MESSAGE_FILE } from './actiontypes';
 import { combineReducers } from "redux";
 
 let defaultUserState = {
@@ -7,6 +7,34 @@ let defaultUserState = {
 
 const userReducer = (state = defaultUserState, action) => {
     if (action.type === SET_USER) {
+        let payload = action.payload;
+        state = { ...payload };
+        return state;
+    }
+    return state;
+}
+
+
+let defaultMessageFileState = {
+    messagefile: null
+}
+
+const messageFileReducer = (state = defaultMessageFileState , action) => {
+    if (action.type === MESSAGE_FILE) {
+        let payload = action.payload;
+        state = { ...payload };
+        return state;
+    }
+    return state;
+}
+
+
+let fileNameState = {
+    message: null
+}
+
+const MessageReducer = (state = fileNameState, action) => {
+    if (action.type === MESSAGE) {
         let payload = action.payload;
         state = { ...payload };
         return state;
@@ -50,5 +78,4 @@ const favouriteChannelReducer = (state = defaultFavouriteChannelState, action) =
     return state;
 }
 
-
-export const combinedReducers = combineReducers({ user: userReducer ,channel:channelReducer,favouriteChannel:favouriteChannelReducer })
+export const combinedReducers = combineReducers({user: userReducer,channel:channelReducer,favouriteChannel:favouriteChannelReducer,Message:MessageReducer,messageFile:messageFileReducer})

@@ -97,6 +97,12 @@
     color: #868686;
 }
 
+.c-pillow_file {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
 
 
 

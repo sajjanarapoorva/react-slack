@@ -4,6 +4,7 @@ import Messages from "./components/Message/Message"
 
 import './App.css';
 import { Grid } from 'semantic-ui-react';
+import DetailsBar from './components/Message/DetailsBar';
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
       <Grid.Column className="messagepanel">
         <Messages />
       </Grid.Column>
-      <Grid.Column width={3}>
+      <Grid.Column style={{paddingTop:"25px",padding:"25px"}} width={4}>
+        <DetailsBar/>
       </Grid.Column>
     </Grid>
   );

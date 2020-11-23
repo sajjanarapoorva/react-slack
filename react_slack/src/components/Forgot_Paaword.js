@@ -46,14 +46,16 @@ const ForgotPassword = ({ history }) => {
                     .auth()
                     .sendPasswordResetEmail(email.value);
                 setIsLoading(false);
+                seterrorState("")
                 setsuccState((message) => message.concat("We have just sent you an email to change your password!"));
                 // history.push("/");
             } catch (serverError) {
                 setIsLoading(false);
+                setsuccState("")
                 seterrorState((error) => error.concat(serverError));
             }
         },
-        // [history]
+        []
     );
 
 

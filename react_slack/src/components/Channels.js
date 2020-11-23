@@ -61,7 +61,6 @@ const Channel = (props) => {
                     <Notification user={props.user} channel={props.channel} notificationChannelId={channel.id}
                     displayName={'# '+ channel.name}
                     />
-                   
                 </Menu.Item>
             })
         }
@@ -71,7 +70,6 @@ const Channel = (props) => {
         setLatVisited(props.user,props.channel)
         setLatVisited(props.user,channel)
         props.selectChannel(channel)
-
     }
 
     const setLatVisited=(user,channel)=>{
@@ -141,7 +139,6 @@ const Channel = (props) => {
                     <Segment stacked>
                         <Form.Input
                             name="Name"
-                            
                             value={channelAddState.Name}
                             onChange={handleInput}
                             type="text"

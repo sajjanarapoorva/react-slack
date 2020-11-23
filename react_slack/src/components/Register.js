@@ -11,11 +11,9 @@ const Register = () => {
         password: '',
         confirmpassword: ''
     }
-
     let errors = [];
 
     let userCollectionRef = firebase.database().ref('users');
-
     const [userState, setuserState] = useState(user);
     const [errorState, seterrorState] = useState(errors);
     const [isLoading, setIsLoading] = useState(false);

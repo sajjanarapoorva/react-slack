@@ -6,7 +6,6 @@ import firebase from '../base/firebase';
 
 const Login = () => {
     let user = {
-        name:'',
         email: '',
         password: ''
     }
@@ -78,7 +77,6 @@ const Login = () => {
     //             })
     //             console.log(createdUser);
     //         })
-
     //         console.log(user.displayName);
     //             try {
     //                firebase
@@ -86,12 +84,10 @@ const Login = () => {
     //                     displayName :user.displayName,
     //                     name:user.displayName
     //                 })
-                  
     //             } catch (error) {
     //               console.log(error);
     //             }
-              
-    //         // ...
+            
     //     }).catch(function (error) {
     //         // Handle Errors here.
     //         var errorCode = error.code;
@@ -108,11 +104,12 @@ const Login = () => {
         <Grid.Column style={{ maxWidth: '500px' }}>
             <img src="Screen-Shot-2019-01-17-at-2.29.34-PM.png" alt="logo" style={{ marginTop: "50px", width: "40%" }}></img>
             <p className="p-refreshed_page__heading">Sign in to Slack</p>
-            <p className="p-refreshed_page__sub_heading">Continue with the Google account or email address you use to sign in.</p>
+            <br></br>
+            {/* <p className="p-refreshed_page__sub_heading">Continue with the Google account or email address you use to sign in.</p> */}
             {/* <Button color="primary" basic fluid={true} style={{marginBottom:"30px",fontSize:"80%"}} onClick={googleUser}> */}
-            {/* <img src="Capture.PNG" style={{width:"80%"}}></img>
-            </Button> */}
-            {/* <div className="c-horizontal_content_rule margin_bottom_150"><hr class="c-horizontal_content_rule__leftrule"/>
+            {/* <img src="Capture.PNG" style={{width:"80%"}}></img> */}
+            {/* </Button> */}
+             {/* <div className="c-horizontal_content_rule margin_bottom_150"><hr class="c-horizontal_content_rule__leftrule"/>
             <div className="c-horizontal_content_rule__content"><strong class="sk_light_gray_always">OR</strong></div>
             <hr className="c-horizontal_content_rule__rightrule"/></div> */}
             <Form onSubmit={onSubmit}>

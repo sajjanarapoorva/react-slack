@@ -1,4 +1,4 @@
-import { SET_USER, SET_CHANNEL ,SET_FAVOURITECHANNEL,REMOVE_FAVOURITECHANNEL} from './actiontypes';
+import { SET_USER, SET_CHANNEL ,SET_FAVOURITECHANNEL,REMOVE_FAVOURITECHANNEL,MESSAGE,MESSAGE_FILE} from './actiontypes';
 
 export const setUser = (user) => {
     return {
@@ -35,4 +35,23 @@ export const removefavouriteChannel = (channel) => {
         }
     }
 }
+
+export const SetMessage = (message) => {
+    return {
+        type: MESSAGE,
+        payload: {
+            message: message
+        }
+    }
+}
+
+export const SetMessageFile = (messagefile) => {
+    return {
+        type: MESSAGE_FILE,
+        payload: {
+            messagefile: messagefile
+        }
+    }
+}
+
 

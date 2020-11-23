@@ -1,7 +1,9 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Segment, Header, Input, Icon } from 'semantic-ui-react';
 
 const MessageHeader = (props) => {
+
+
     return <Segment clearing>
         <Header floated="left" fluid="true" as="h2">
             <span>
@@ -11,7 +13,9 @@ const MessageHeader = (props) => {
                 color={props.starred ? "yellow" :"black"}
                 ></Icon>}
             </span>
-        <Header.Subheader><Icon name="user outline"></Icon>{props.uniqueUser} | {props.channelDesc}
+        <Header.Subheader>
+            {(!props.isPrivatechat ? (<Icon name="user outline"></Icon>):"")}{ (!props.isPrivatechat ? props.uniqueUser +" | " +  props.channelDesc :"")}
+        
         </Header.Subheader> 
         </Header>
         <Header floated="right">

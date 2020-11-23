@@ -5,21 +5,17 @@ import MessageContent from '../Message/MessageContent'
 import MessageInput from '../Message/MessageInput'
 import firebase from '../../base/firebase'
 import { connect } from 'react-redux'
-import { setfavouriteChannel, removefavouriteChannel } from '../../store/actioncreator'
+import { setfavouriteChannel, removefavouriteChannel,SetMessage,SetMessageFile } from '../../store/actioncreator'
 import '../style.css'
 
 
 const Message = (props) => {
     const messageRef = firebase.database().ref('messages')
-
     const usersRef = firebase.database().ref('users')
-
     const [messageState, setmessageState] = useState([]);
     const [searchState, setsearchState] = useState("");
 
     let divRef = useRef()
-
-
     useEffect(() => {
         if (props.channel) {
             setmessageState([]);
@@ -38,42 +34,34 @@ const Message = (props) => {
 
     useEffect(() => {
         if (props.user) {
-
             usersRef.child(props.user.uid).child('favourite').on('child_added', (snap) => {
-
                 props.setfavouriteChannel(snap.val())
-
             })
-
             usersRef.child(props.user.uid).child('favourite').on("child_removed", (snap) => {
                 props.removefavouriteChannel(snap.val())
-
             })
-
             return () => usersRef.child(props.user.uid).child('favourite').off()
-        }
+        }        
     }, [props.channel])
 
 
-    useEffect(()=> {
-        divRef.scrollIntoView({behavior : 'smooth'});
-    },[messageState])
+    useEffect(() => {
+        divRef.scrollIntoView({ behavior: 'smooth' });
+    }, [messageState])
 
 
-    const imgLoaded=()=>{
-        divRef.scrollIntoView({behavior : 'smooth'});
+    const imgLoaded = () => {
+        divRef.scrollIntoView({ behavior: 'smooth' });
 
     }
 
-
-
     const displayMessage = () => {
         let messageToDisplay = searchState ? filterBySearch() : messageState;
-
         if (messageToDisplay.length > 0) {
             return messageToDisplay.map((message) => {
-                return <MessageContent key={message.timestamp} message={message} ownMessage={message.user?.id === props.user?.uid} imgLoaded={imgLoaded}>
+                return <div><MessageContent key={message.timestamp} messageToDisplay={messageToDisplay} message={message} ownMessage={message.user?.id === props.user?.uid} imgLoaded={imgLoaded}>
                 </MessageContent>
+                </div>
             })
         }
     }
@@ -84,6 +72,8 @@ const Message = (props) => {
             }
             return acc
         }, [])
+        props.SetMessage(uniqueUsers)
+        props.SetMessageFile(messageState)
 
         return uniqueUsers.length
     }
@@ -91,7 +81,6 @@ const Message = (props) => {
     const searchChange = (e) => {
         const target = e.target
         setsearchState(target.value)
-
     }
 
     const filterBySearch = () => {
@@ -103,16 +92,13 @@ const Message = (props) => {
             }
             return acc
         }, [])
-
         return messages
-
     }
 
     const starChange = () => {
         let FavRef = usersRef.child(props.user.uid).child("favourite").child(props.channel.id);
         if (isStared()) {
             FavRef.remove();
-
         }
         else {
             FavRef.set({ channelId: props.channel.id, channelName: props.channel.name })
@@ -121,17 +107,18 @@ const Message = (props) => {
 
     const isStared = () => {
         return Object.keys(props.favouriteChannels).includes(props.channel?.id)
-
     }
 
     return <div className="messages">
         <MessageHeader channelDesc={props.channel?.desc} channelName={props.channel?.name} uniqueUser={uniqueUserCount()} searchChange={searchChange} isPrivatechat={props.channel?.isPrivatechat}
             starChange={starChange} starred={isStared()}
         />
+
         <Segment className="messagecontent">
             <Comment.Group>
                 {displayMessage()}
-                <div ref={currentEle => divRef = currentEle}></div>
+                <div ref={currentEle => divRef = currentEle}
+                ></div>
             </Comment.Group>
         </Segment>
         <MessageInput />
@@ -142,16 +129,19 @@ const mapStateToProps = (state) => {
     return {
         channel: state.channel.currentChannel,
         user: state.user.currentUser,
-        favouriteChannels: state.favouriteChannel.favouriteChannel
+        favouriteChannels: state.favouriteChannel.favouriteChannel,
+        message:state.message?.message,
+        messagefile:state.messageFile.messagefile
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         setfavouriteChannel: (channel) => dispatch(setfavouriteChannel(channel)),
-        removefavouriteChannel: (channel) => dispatch(removefavouriteChannel(channel))
+        removefavouriteChannel: (channel) => dispatch(removefavouriteChannel(channel)),
+        SetMessage: (message) => dispatch(SetMessage(message)),
+        SetMessageFile: (messagefile) => dispatch(SetMessageFile(messagefile))
     }
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Message);

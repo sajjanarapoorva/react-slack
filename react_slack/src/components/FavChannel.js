@@ -5,7 +5,6 @@ import { setChannel } from '../store/actioncreator'
 
 
 const FavChannels = (props) => {
-    
     const displayChannels = () => {
         if (Object.keys(props.favouriteChannels).length > 0) {
             return Object.keys(props.favouriteChannels).map((channelId)=>{

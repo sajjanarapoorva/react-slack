@@ -36,7 +36,6 @@ const Index = (props) => {
     })
   },[]);
 
-
   return (
     <>
     <AppLoader loading={props.loading && props.location.pathname==="/"} />
